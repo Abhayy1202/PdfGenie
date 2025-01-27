@@ -17,5 +17,6 @@ const embeddings = new GoogleGenerativeAIEmbeddings({ApiKey})
  });
 
  const retriever = vectorStore.asRetriever()
+ console.dir(retriever)
 
  export {retriever}

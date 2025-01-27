@@ -25,7 +25,7 @@ export const parsePDF = async (filename) => {
     });
     const chunks = await splitter.createDocuments([rawText]);
   
-    console.log(chunks[0]);
+    console.dir(chunks[0]);
 
     // Retrieve environment variables
     const sbApiKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -44,7 +44,10 @@ export const parsePDF = async (filename) => {
     // Create a SupabaseVectorStore
     await SupabaseVectorStore.fromDocuments(
       chunks,
-      new GoogleGenerativeAIEmbeddings({ ApiKey, modelName: "embedding-001" }),
+      new GoogleGenerativeAIEmbeddings({
+        ApiKey,
+        modelName: "text-embedding-004",
+      }),
       {
         //object holding supabase details
         client,

@@ -2,17 +2,16 @@
   "name": "chatbot_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/server.js",
   "type": "module",
   "engines": {},
   "scripts": {
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
-    "start":"node src/server.js"
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@langchain/anthropic": "^0.2.15",
     "@langchain/community": "^0.2.31",
     "@langchain/core": "^0.2.28",
     "@langchain/google-genai": "^0.0.26",
