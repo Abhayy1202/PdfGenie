@@ -1,17 +1,12 @@
 import React from "react";
-import { Button } from "./ui/Button.jsx";
+import { Button } from "./ui/button.jsx";
 import { NewChatButton } from "./NewChatBtn.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 import { X, FileText } from "lucide-react";
 
 export const Sidebar = () => {
-  const {
-    sidebarOpen,
-    setSidebarOpen,
-    sidebarWidth,
-    setFile,
-    file,
-  } = useAppContext();
+  const { sidebarOpen, setSidebarOpen, sidebarWidth, setFile, file } =
+    useAppContext();
 
   return (
     <div
@@ -55,8 +50,10 @@ export const Sidebar = () => {
           <span className="text-sm font-medium font-onest text-center mt-[-8px] max-w-[180px] leading-[22px] text-white/50">
             Sign in for free to save your chat history
           </span>
-          <button className="mt-4 text-[14px] font-onest font-semibold text-center px-3 py-[14px] bg-[#2563eb] rounded-lg"
-          onClick={()=>alert("Upcoming Feature")}>
+          <button
+            className="mt-4 text-[14px] font-onest font-semibold text-center px-3 py-[14px] bg-[#2563eb] rounded-lg"
+            onClick={() => alert("Upcoming Feature")}
+          >
             Sign In
           </button>
         </div>

@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
-import { Button } from "./ui/Button.jsx";
+import { Button } from "./ui/button.jsx";
 import { Textarea } from "./ui/textarea.jsx";
 import { X } from "lucide-react";
 import { DetailsForm } from "./DetailsForm.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 
-export const ChatInterface = ({ handleDetailsChange, handleDetailsSubmit ,handleSend }) => {
+export const ChatInterface = ({
+  handleDetailsChange,
+  handleDetailsSubmit,
+  handleSend,
+}) => {
   const {
     chatOpen,
     setChatOpen,
@@ -17,15 +21,14 @@ export const ChatInterface = ({ handleDetailsChange, handleDetailsSubmit ,handle
     showDetailsForm,
     setShowDetailsForm,
     userDetails,
-    file
-
+    file,
   } = useAppContext();
 
-  useEffect(()=>{
-    if(file){
+  useEffect(() => {
+    if (file) {
       setChatOpen(true);
     }
-  },[file])
+  }, [file]);
 
   return (
     <div
