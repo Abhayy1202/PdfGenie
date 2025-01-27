@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Button } from "@/components/ui/Button";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "./ui/Button";
+import { Textarea } from "./ui/textarea";
 import { X } from "lucide-react";
 import { DetailsForm } from "./DetailsForm";
 import { useAppContext } from "../context/AppContext.jsx";
