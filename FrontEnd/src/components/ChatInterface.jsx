@@ -37,7 +37,7 @@ export const ChatInterface = ({
       } bg-white border-t lg:border-l border-gray-200 flex flex-col h-full lg:h-auto  lg:static bottom-0 right-0 z-40 transition-all duration-300 ease-in-out`}
       style={{ width: `${chatWidth}px` }}
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-dvh">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold">Chat</h2>
           <Button
@@ -50,7 +50,7 @@ export const ChatInterface = ({
           </Button>
         </div>
 
-        <div className="flex-1 overflow-auto p-4 space-y-4">
+        <div className="flex-1 overflow-auto p-4 space-y-4 ">
           {query.map((msg, index) => (
             <div
               key={index}
