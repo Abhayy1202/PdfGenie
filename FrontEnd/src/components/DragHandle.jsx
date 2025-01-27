@@ -1,11 +1,14 @@
 import React from "react";
-import { GripVertical } from "lucide-react";
+import { ChevronsLeftRightEllipsis } from "lucide-react";
 
 export const DragHandle = ({ onMouseDown }) => (
   <div
-    className="w-2 hover:bg-gray-300 cursor-col-resize flex items-center justify-center"
-    onMouseDown={onMouseDown}
+    className="hidden lg:flex w-2 cursor-col-resize items-center justify-center hover:bg-gray-300"
+    onMouseDownCapture={onMouseDown}
   >
-    <GripVertical className="h-6 w-6 text-gray-400" />
+    <span className="rounded-full h-6 w-6 bg-gray-300 flex items-center justify-center cursor-col-resize z-50">
+      <ChevronsLeftRightEllipsis className="h-6 w-6 overflow-visible z-50 " />
+    </span>
+    
   </div>
 );

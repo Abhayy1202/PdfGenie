@@ -1,6 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 import React from "react";
-import useTheme from "./context/Theme.jsx";
+import useTheme from "../context/Theme.jsx";
 
 function ThemeBtn() {
   const { themeMode, lightmode, darkmode } = useTheme();
@@ -11,21 +11,14 @@ function ThemeBtn() {
 
   return (
     <button
-      className="relative rounded-full p-4 duration-200 hover:bg-blue-100"
+      className="p-2 rounded-full hover:bg-neutral-800 transition-colors"
       onClick={onChangeBtn}
     >
-      {/* Sun Icon */}
-      <Sun
-        className={`h-6 w-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out ${
-          themeMode === "dark" ? "opacity-0 scale-0" : "opacity-100 scale-100"
-        }`}
-      />
-      {/* Moon Icon */}
-      <Moon
-        className={`h-6 w-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out ${
-          themeMode === "dark" ? "opacity-100 scale-100" : "opacity-0 scale-0"
-        }`}
-      />
+      {themeMode === "dark" ? (
+        <Sun className="h-6 w-6 text-yellow-600 transition-transform duration-300 ease-in-out" />
+      ) : (
+        <Moon className="h-6 w-6 transition-transform duration-300 ease-in-out " />
+      )}
       <span className="sr-only">Toggle Theme</span>
     </button>
   );

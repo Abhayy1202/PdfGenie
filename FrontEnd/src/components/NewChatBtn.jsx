@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
+import { useAppContext } from "../context/AppContext.jsx";
 
-export const NewChatButton = ({ setFile ,handlePDF }) => {
+export const NewChatButton = () => {
+  const { setFile } = useAppContext();
+
   const fileInputRef = useRef(null);
 
   const handleClick = () => {
     fileInputRef.current.click();
   };
 
-
-  const handleFileChange =  async(event) => {
+  const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
       setFile(selectedFile);
@@ -16,11 +18,24 @@ export const NewChatButton = ({ setFile ,handlePDF }) => {
       // await handlePDF();
     } else {
       console.error("Please select a PDF file");
-     
     }
     // Reset the file input
     event.target.value = "";
-    
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const selectedFile = event.dataTransfer.files[0];
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      setFile(selectedFile);
+      console.log("File dropped:", selectedFile.name);
+    } else {
+      console.error("Please drop a PDF file");
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -28,6 +43,8 @@ export const NewChatButton = ({ setFile ,handlePDF }) => {
       <div
         className="box-border rounded-sm border-2 border-gray-300 border-dashed cursor-pointer text-center h-full flex flex-col justify-center items-center"
         onClick={handleClick}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
         <input
           ref={fileInputRef}
