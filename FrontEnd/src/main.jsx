@@ -8,11 +8,9 @@ import { ThemeProvider } from "./context/Theme.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
       <AppProvider>
         <App />
       </AppProvider>
-    </ThemeProvider>
   </StrictMode>
 );
 getAnalytics();
