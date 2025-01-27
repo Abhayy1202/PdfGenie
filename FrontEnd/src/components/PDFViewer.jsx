@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "./ui/Button.jsx";
 import { ZoomIn, ZoomOut } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";

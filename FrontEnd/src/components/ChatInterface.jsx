@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Button } from "./ui/Button";
-import { Textarea } from "./ui/textarea";
+import { Button } from "./ui/Button.jsx";
+import { Textarea } from "./ui/textarea.jsx";
 import { X } from "lucide-react";
-import { DetailsForm } from "./DetailsForm";
+import { DetailsForm } from "./DetailsForm.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 
 export const ChatInterface = ({ handleDetailsChange, handleDetailsSubmit ,handleSend }) => {

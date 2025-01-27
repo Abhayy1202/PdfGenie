@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "./ui/Button.jsx";
 import { Menu, MessageSquare } from "lucide-react";
 import { useAppContext } from "../context/AppContext.jsx";
 

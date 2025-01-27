@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "./ui/Button";
-import { NewChatButton } from "./NewChatBtn";
+import { Button } from "./ui/Button.jsx";
+import { NewChatButton } from "./NewChatBtn.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 import { X, FileText } from "lucide-react";
 

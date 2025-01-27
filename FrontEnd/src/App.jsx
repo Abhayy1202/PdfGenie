@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import { useAppContext } from "./context/AppContext.jsx";
-import { MobileHeader } from "./components/MobileHeader";
-import { Sidebar } from "./components/Sidebar";
-import { PDFViewer } from "./components/PDFViewer";
-import { ChatInterface } from "./components/ChatInterface";
-import { DragHandle } from "./components/DragHandle";
+import { MobileHeader } from "./components/MobileHeader.jsx";
+import { Sidebar } from "./components/Sidebar.jsx";
+import { PDFViewer } from "./components/PDFViewer.jsx";
+import { ChatInterface } from "./components/ChatInterface.jsx";
+import { DragHandle } from "./components/DragHandle.jsx";
 import "./App.css";
 
 function App() {

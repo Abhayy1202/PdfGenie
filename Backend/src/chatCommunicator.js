@@ -15,7 +15,7 @@ export const communicator = async (query) => {
     const ApiKey = process.env.GOOGLE_API_KEY;
     const llm = new ChatGoogleGenerativeAI({
       ApiKey,
-      model: "gemini-1.5-pro-latest",
+      model: "gemini-1.5-flash-latest",
     });
 
 
@@ -140,3 +140,7 @@ answer:`;
     throw error;
   }
 };
+ 
+
+
+
