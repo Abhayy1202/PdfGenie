@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { communicator } from "./chatCommunicator.js";
+import { Readable } from "stream";
 import multer from "multer";
 import axios from "axios";
 import base64Img from "base64-img";
@@ -10,8 +11,14 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import dotenv from "dotenv";
+import { v2 as cloudinary } from "cloudinary";
 dotenv.config();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 // var base64Img = require("base64-img");
 
 const app = express();
@@ -29,50 +36,41 @@ app.post("/clear", async (req, res) => {
   res.status(200).json({ message:"chat-cleared" });
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const upload = multer({storage:multer.memoryStorage()});
 
-
-const assetsDirectory = path.join(__dirname, '../assets');  // Path to the 'assets' folder
-if (!fs.existsSync(assetsDirectory)) {
-  fs.mkdirSync(assetsDirectory, { recursive: true });  // Creates the folder if it doesn't exist
-}
-
-// Configure Multer storage
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, assetsDirectory);  // Use the created or existing 'assets' folder
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname)); 
-//     // console.log("1@"+file.originalname) // Unique filenamen
-//   },
-// });
-const storage = multer.memoryStorage();
-
-
-const upload = multer({storage});
 // Endpoint to handle file upload
-app.post('/upload', upload.single('file'), async (req, res) => {
+app.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-   try {
-    
-    await parsePDF(req.file.filename);
-    
-    // const response=await communicator("get-greeting");
-     res.json({
-       message: "File uploaded successfully",
-       filename: req.file.filename,
-      //  data:response 
-     });
-   } catch (error) {
-     console.error("Error processing PDF:", error);
-     res.status(500).json({ error: "PDF upload failed" });
-   }
-  
+
+  const uploadStream = cloudinary.uploader.upload_stream(
+    { resource_type: "raw", timeout: 60000 },
+    async (error, result) => {
+      if (error) {
+        console.error("Cloudinary Upload Error:", error);
+        return res.status(500).json({ error: "Cloudinary upload failed" });
+      }
+
+      try {
+        const response = await axios.get(result.secure_url, { responseType: "arraybuffer" });
+        const pdfBuffer = Buffer.from(response.data);
+        
+        await parsePDF(pdfBuffer);
+        res.json({ message: "File uploaded and processed successfully", pdfUrl: result.secure_url });
+      } catch (error) {
+        console.error("Error processing PDF:", error);
+        res.status(500).json({ error: "Error processing the PDF file" });
+      }
+    }
+  );
+
+  // Stream file buffer to Cloudinary
+  const bufferStream = Readable.from(req.file.buffer);
+  bufferStream.pipe(uploadStream);
 });
+
+
 
 app.post("/",async(req,res)=>{
 

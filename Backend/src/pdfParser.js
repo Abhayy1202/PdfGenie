@@ -8,12 +8,11 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 dotenv.config();
 
-export const parsePDF = async (filename) => {
+export const parsePDF = async (pdfBuffer) => {
   try {
-    // Read the PDF file
-    const pdfBuffer = fs.readFileSync(`./assets/${filename}`);
    
     // Parse the PDF content
+    console.log("pdfBuffer: ",pdfBuffer);
     const pdfData = await pdfParse(pdfBuffer);
     const rawText = pdfData.text;
 
@@ -52,7 +51,7 @@ export const parsePDF = async (filename) => {
         //object holding supabase details
         client,
         tableName: "documents",
-        queryName: "match_documents",
+        queryName: "match_documents2",
       }
     );
   } 
