@@ -39,15 +39,16 @@ if (!fs.existsSync(assetsDirectory)) {
 }
 
 // Configure Multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, assetsDirectory);  // Use the created or existing 'assets' folder
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); 
-    // console.log("1@"+file.originalname) // Unique filenamen
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, assetsDirectory);  // Use the created or existing 'assets' folder
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname)); 
+//     // console.log("1@"+file.originalname) // Unique filenamen
+//   },
+// });
+const storage = multer.memoryStorage();
 
 
 const upload = multer({storage});
