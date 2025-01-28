@@ -5,7 +5,7 @@ import multer from "multer";
 import axios from "axios";
 import base64Img from "base64-img";
 import { parsePDF } from "./pdfParser.js";
-import PdfParse from "pdf-parse";
+import PdfParse from "pdf-parse-new";
 import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';

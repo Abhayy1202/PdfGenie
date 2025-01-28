@@ -1,5 +1,5 @@
 import fs from "fs";
-import pdfParse from "pdf-parse";
+import pdfParse from "pdf-parse-new";
 import dotenv from "dotenv";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { createClient } from "@supabase/supabase-js";
@@ -57,7 +57,7 @@ export const parsePDF = async (filename) => {
     );
   } 
   catch (error) {
-    console.error("Error:", error);
+    console.error("Error Pdf-Parser:", error);
   }
 };
 

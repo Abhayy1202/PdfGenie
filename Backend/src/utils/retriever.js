@@ -16,7 +16,6 @@ const embeddings = new GoogleGenerativeAIEmbeddings({ApiKey})
    queryName: "match_documents",
  });
 
- const retriever = vectorStore.asRetriever()
- console.dir(retriever)
-
+ const retriever = vectorStore.asRetriever()  
+ 
  export {retriever}
