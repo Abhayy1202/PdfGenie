@@ -29,7 +29,7 @@ function App() {
 
   const clearChat = async () => {
     try {
-      const response = await axios.post(`http://${IP}/clear`, {
+      const response = await axios.post(`https://${IP}/clear`, {
         headers: { "Content-Type": "application/json" },
         timeout: 20000,
       });
@@ -46,7 +46,7 @@ function App() {
       formData.append("file", file);
       try {
         const response = await axios.post(
-          `http://${IP}/upload`,
+          `https://${IP}/upload`,
           formData,
           {
             headers: {
@@ -92,7 +92,7 @@ function App() {
         formData.append("image", file);
 
         const response = await axios.post(
-          `http://${IP}/process-image`,
+          `https://${IP}/process-image`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -102,7 +102,7 @@ function App() {
 
         assistantMessage = response.data;
       } else {
-        const response = await axios.post(`http://${IP}/chat-bot`,
+        const response = await axios.post(`https://${IP}/chat-bot`,
           { query: input },
           {
             headers: { "Content-Type": "application/json" },
@@ -153,7 +153,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        `http://${IP}/quotation`,
+        `https://${IP}/quotation`,
         userDetails,
         {
           headers: { "Content-Type": "application/json" },
