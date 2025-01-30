@@ -130,8 +130,8 @@ export const PDFViewer = () => {
           {error && <div className="text-red-500">{error}</div>}
           <Page
             pageNumber={pageNumber}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
+            renderTextLayer={true}
+            renderAnnotationLayer={true}
             scale={scale / 100}
           />
         </Document>
@@ -163,7 +163,7 @@ export const PDFViewer = () => {
             </h2>
           </div>
           <div className="box-border w-full max-w-[820px] mx-auto mt-[47px]">
-            <div className="relative bg-white border border-[#EBEEF9] shadow-lg rounded-[24px] p-[26px]">
+            <div className="relative bg-white border border-[#EBEEF9] shadow-[0px_0px_20px_#2563eb]  rounded-[24px] p-[26px]">
               <div className="absolute top-[-41px] right-[-74px] w-[200px] h-[100px] bg-[url('/drag-arrow.png')] bg-contain bg-no-repeat"></div>
               <div
                 className="rounded-[8px] p-[54px] text-center  border-dashed border-2 border-[#2563eb] hover:bg-[#2564eb16]

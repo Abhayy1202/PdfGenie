@@ -9,6 +9,8 @@ import { DragHandle } from "./components/DragHandle.jsx";
 import "./App.css";
 
 function App() {
+  const IP = String(import.meta.env.VITE_AWS_IP);
+
   const {
     setQuery,
     input,
@@ -27,7 +29,7 @@ function App() {
 
   const clearChat = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/clear", {
+      const response = await axios.post(`http://${IP}/clear`, {
         headers: { "Content-Type": "application/json" },
         timeout: 20000,
       });
@@ -44,7 +46,7 @@ function App() {
       formData.append("file", file);
       try {
         const response = await axios.post(
-          "http://localhost:3000/upload",
+          `http://${IP}/upload`,
           formData,
           {
             headers: {
@@ -90,7 +92,7 @@ function App() {
         formData.append("image", file);
 
         const response = await axios.post(
-          "http://localhost:3000/process-image",
+          `http://${IP}/process-image`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -100,8 +102,7 @@ function App() {
 
         assistantMessage = response.data;
       } else {
-        const response = await axios.post(
-          "http://localhost:3000/chat-bot",
+        const response = await axios.post(`http://${IP}/chat-bot`,
           { query: input },
           {
             headers: { "Content-Type": "application/json" },
@@ -152,7 +153,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/quotation",
+        `http://${IP}/quotation`,
         userDetails,
         {
           headers: { "Content-Type": "application/json" },
@@ -208,7 +209,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     return () => {
@@ -228,6 +228,7 @@ function App() {
             <PDFViewer />
             <DragHandle onMouseDown={() => (draggingChatRef.current = true)} />
             <ChatInterface
+              clearChat={clearChat}
               handleSend={handleSend}
               handleDetailsChange={handleDetailsChange}
               handleDetailsSubmit={handleDetailsSubmit}

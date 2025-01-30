@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "./ui/button.jsx";
 import { Textarea } from "./ui/textarea.jsx";
-import { X } from "lucide-react";
+import { X, RotateCcw } from "lucide-react";
 import { DetailsForm } from "./DetailsForm.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 
@@ -9,6 +9,7 @@ export const ChatInterface = ({
   handleDetailsChange,
   handleDetailsSubmit,
   handleSend,
+  clearChat
 }) => {
   const {
     chatOpen,
@@ -22,32 +23,43 @@ export const ChatInterface = ({
     setShowDetailsForm,
     userDetails,
     file,
+    setFile
   } = useAppContext();
 
+  const handleReset =()=>{
+    clearChat();
+    setFile(null);
+}
+
   useEffect(() => {
-    if (file) {
-      setChatOpen(true);
-    }
+     file? setChatOpen(true):setChatOpen(false);
   }, [file]);
 
   return (
     <div
       className={`${
         chatOpen ? "block" : "hidden"
-      } bg-white border-t lg:border-l border-gray-200 flex flex-col h-full lg:h-auto  lg:static bottom-0 right-0 z-40 transition-all duration-300 ease-in-out`}
+      }  bg-white border-t lg:border-l border-gray-200 flex flex-col h-full lg:h-auto  lg:static bottom-0 right-0 z-40 transition-all duration-300 ease-in-out shadow-lg`}
       style={{ width: `${chatWidth}px` }}
     >
       <div className="flex flex-col h-dvh">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold">Chat</h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setChatOpen(false)}
-          >
-            <X className="h-6 w-6" />
-          </Button>
+          <div className="flex flex-end ">
+            <Button  
+            variant="ghost" size="icon"
+            onClick={handleReset}>
+              <RotateCcw className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setChatOpen(false)}
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
         </div>
 
         <div className="flex-1 overflow-auto p-4 space-y-4 ">
